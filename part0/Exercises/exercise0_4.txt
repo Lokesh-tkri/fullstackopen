@@ -1,0 +1,40 @@
+browser-->server HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server-->browser HTML code
+
+browser-->server HTTP GET 
+https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser main.css
+
+browser-->server HTTP GET 
+https://studies.cs.helsinki.fi/exampleapp/main.js
+server-->browser main.js
+
+main.js execution starts:
+browser-->server HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser data.json
+
+adding a new note howdy
+by submit button
+
+browser-->server HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+ser
+
+posting data howdy by submit button
+Request payload
+(note=howdy)
+
+redirect 302 found code 
+redirected to notes url
+server-->browser HTTP GET https://studies.cs.helsinki.fi/exampleapp/new_note
+
+browser-->server HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser 304 NOT Modified
+
+browser-->server HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server-->browser 304 NOT Modified
+
+main.js execution starts:
+browser-->server HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser data.json
+(contains additional note added by submit button)
+

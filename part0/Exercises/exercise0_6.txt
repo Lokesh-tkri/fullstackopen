@@ -1,0 +1,19 @@
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+server-->browser: HTML-code
+
+browser-->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css
+browser-->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+server-->browser: spa.js
+
+spa.js script is executed 
+browser-->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser data.json
+
+create new note "alloha" by submit 
+browser-->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+Request Payload:
+{"content":"alloha","date":"2021-02-01T16:44:51.509Z"}
+server-->browser: 201 created JSON returned
+
+NO RELOAD
