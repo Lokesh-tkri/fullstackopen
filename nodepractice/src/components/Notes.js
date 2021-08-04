@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import React from 'react';
+
 import axios from 'axios'
+
 
 const Weather = ({data}) => {
   return (
@@ -19,6 +20,11 @@ const tempdata = {
   }
 
 const Singlenote = ({note}) => {
+
+  console.log('in singlenote...');
+  console.log(note);
+  console.log('in singlenote...end');
+  
   const [data,setdata] = useState(tempdata)
   console.log(note)
   const hook = () => {
@@ -29,7 +35,7 @@ const Singlenote = ({note}) => {
     axios.get(url).then(func)
   }
   useEffect(hook,[note.capital])
-
+  
   return (
     <>
     <h1>{note.name}</h1>
@@ -47,36 +53,38 @@ const Singlenote = ({note}) => {
     <h2>
       Weather
     </h2>
-      <Weather data={data} />
-    </>
+      <Weather data={data} /> 
+    </> 
   )
 }
 
-const buttonclick = (note) => {
-  console.log('in button...')
-  console.log(note);
+
+
+const Button = ({note,handlefunc}) => {
+  return (
+    <button onClick={() => handlefunc([note])}> details</button>
+  )
+}
+
+const Note = ({note,handlefunc}) => {
   return (
   <>
-  </>)
+  {note.name}
+  <Button note={note} handlefunc={handlefunc} />
+  </>
+  )
 }
 
-const Note = ({note}) => {
-    return (
-      <>
-        <li style={{'listStyle' : 'none'}}>
-          {note.name}
-          <button onClick={() => buttonclick(note)}> details</button>
-        </li>
-      </>
-    )
-}
-
-const Results = ({notes}) => {
+const Results = ({notes,handlefunc}) => {
   return (
     <>
     <ul>
       {notes.map((note,i)=>{
-        return (<Note key={i} note={note} />)
+        return (
+          <li style={{'listStyle' : 'none'}}>
+            <Note key={i} note={note} handlefunc={handlefunc} />
+          </li>
+          )
       })}
     </ul>
     </>
@@ -90,26 +98,17 @@ const Toomany = () => {
 }
 
 
-const Totnotes = ({notes}) => {
 
+const Notes = ({notes,setnote}) => {
   if (notes.length > 10){
     return (<Toomany />)
   }else if(notes.length === 1){
     return (<Singlenote note={notes[0]} />)
   }else {
     return(
-      <Results notes={notes} />
+      <Results notes={notes} handlefunc={setnote}/>
     )
   }
-}
-
-const Notes = ({notes}) => {
-  
-    return (
-      <>
-        <Totnotes notes={notes}/>
-      </>
-    )
 }
 
 

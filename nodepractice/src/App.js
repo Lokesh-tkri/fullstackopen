@@ -7,23 +7,19 @@ import axios from 'axios'
 const App = () => {
   const [allnotes,setAllnotes] = useState([])
   const [searchitem,setSearchitem] = useState('')
-  const [showall,setShowall] = useState(true)
+  const [notestodisplay,setnotestodisplay] = useState(allnotes)
 
 
   useEffect(() => {
     axios.get('https://restcountries.eu/rest/v2/all').then((response) => {
-      setAllnotes(response.data)
+      setAllnotes(response.data);
     })
-  },[])
+  },[allnotes])
 
  
   const handlesearchOnchange = (event) => {
     setSearchitem(event.target.value)
-    let filtervar = true
-    if(event.target.value !== ''){
-      filtervar = false
-    }
-    setShowall(filtervar)
+    setnotestodisplay(filterfunc())
   }
 
   const filterfunc = () => {
@@ -35,12 +31,10 @@ const App = () => {
     return resset
   }
 
-  const notestodisplay = showall ? allnotes : filterfunc()
-  
   return (
     <div>
       <Filter searchitem={searchitem} handlesearchOnchange={handlesearchOnchange} />
-      <Notes notes={notestodisplay} />
+      <Notes notes={notestodisplay} setnote={setnotestodisplay} />
     </div>
   )
 }
