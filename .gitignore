@@ -102,3 +102,10 @@ dist
 
 # TernJS port file
 .tern-port
+prct/package-lock.json
+prct/package.json
+*.ico
+*.png
+prct/public/manifest.json
+prct/public/robots.txt
+prct/README.md
